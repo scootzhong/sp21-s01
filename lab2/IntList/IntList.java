@@ -64,4 +64,9 @@ public class IntList {
         System.arraycopy(argList, 1, restList, 0, argList.length - 1);
         return new IntList(argList[0], IntList.of(restList));
     }
+
+//    public static void main(String[] args) {
+//        IntList empty = IntList.of();
+//        System.out.println(empty.toString());
+//    }
 }

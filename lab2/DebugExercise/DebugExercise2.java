@@ -40,29 +40,57 @@ public class DebugExercise2 {
      * and b = {0, 20, 5}, this function will return {1, 20, 5}.
      * */
     public static int[] arrayMax(int[] a, int[] b) {
-        if (a.length != b.length) {
-            System.out.println("ERROR! Arrays don't match");
-            return null;
-        }
-        int[] returnArray = new int[a.length];
-        for (int i = 0; i < a.length; i += 1) {
-            int biggerValue = max(a[i], b[i]);
-            returnArray[i] = biggerValue;
-        }
+        // 循环N次（N为数组a或b的长度，需假设a和b长度相同）：
+        //  找到a[i]和b[i]的更大的值，设置为新数组的第i个值
+        // 返回新数组
 
-        return returnArray;
+        int length = a.length;
+        int[] newArray = new int[length];
+        for(int i = 0; i < length; i++) {
+            if (a[i] >= b[i]) {
+                newArray[i] = a[i];
+            }
+            else {
+                newArray[i] = b[i];
+            }
+        }
+        return newArray;
+
+
+//        if (a.length != b.length) {
+//            System.out.println("ERROR! Arrays don't match");
+//            return null;
+//        }
+//        int[] returnArray = new int[a.length];
+//        for (int i = 0; i < a.length; i += 1) {
+//            int biggerValue = max(a[i], b[i]);
+//            returnArray[i] = biggerValue;
+//        }
+//
+//        return returnArray;
     }
 
     /** Returns the sum of all elements in x. */
     public static int arraySum(int[] x) {
-        int i = 0;
+        if (x == null) {
+            return 0;
+        }
         int sum = 0;
-        while (i < x.length) {
-            sum = sum + add(sum, x[i]);
-            i = i + 1;
+        for (int a : x) {
+            sum += a;
         }
         return sum;
     }
+
+
+//        int i = 0;
+//        int sum = 0;
+//        while (i < x.length) {
+//            sum = sum + add(sum, x[i]);
+//            i = i + 1;
+//        }
+//        return sum;
+//    }
 
     /** Returns the sum of the element-wise max of a and b.
      *  For example if a = {2, 0, 10, 14} and b = {-5, 5, 20, 30},
