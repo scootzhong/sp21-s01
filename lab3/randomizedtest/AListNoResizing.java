@@ -52,4 +52,9 @@ public class AListNoResizing<Item> {
         size = size - 1;
         return x;
     }
+
+//    public static void main(String[] args) {
+//        AListNoResizing<Integer> alist = new AListNoResizing<>();
+//        alist.addLast(10010);
+//    }
 }
