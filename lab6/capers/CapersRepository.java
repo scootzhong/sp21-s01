@@ -1,64 +1,116 @@
 package capers;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import static capers.Utils.*;
 
-/** A repository for Capers 
+/** Capers 的存储库
  * @author TODO
- * The structure of a Capers Repository is as follows:
+ * Capers 存储库的结构如下：
  *
- * .capers/ -- top level folder for all persistent data in your lab12 folder
- *    - dogs/ -- folder containing all of the persistent data for dogs
- *    - story -- file containing the current story
+ * .capers/ -- 您的 lab12 文件夹中所有持久数据的顶级文件夹
+ *    - dogs/ -- 包含所有狗的持久数据的文件夹
+ *    - story -- 包含当前故事的文件
  *
- * TODO: change the above structure if you do something different.
+ * TODO：如果做了其他不同的事情，请更改上面的结构。
  */
 public class CapersRepository {
-    /** Current Working Directory. */
+    /** 当前工作目录。 */
     static final File CWD = new File(System.getProperty("user.dir"));
 
-    /** Main metadata folder. */
-    static final File CAPERS_FOLDER = null; // TODO Hint: look at the `join`
-                                            //      function in Utils
+    /** 主元数据文件夹。 */
+    static final File CAPERS_FOLDER = Utils.join(CWD, ".capers"); // TODO 提示：查看 Utils 中的 `join` 函数
+
+    /** story工作目录 */
+    static final File STORY_FILE  = Utils.join(CAPERS_FOLDER, "story");
 
     /**
-     * Does required filesystem operations to allow for persistence.
-     * (creates any necessary folders or files)
-     * Remember: recommended structure (you do not have to follow):
+     * 执行必要的文件系统操作以实现持久性。
+     * （创建任何必要的文件夹或文件）
+     * 记住：推荐的结构（您不必遵循）：
      *
-     * .capers/ -- top level folder for all persistent data in your lab12 folder
-     *    - dogs/ -- folder containing all of the persistent data for dogs
-     *    - story -- file containing the current story
+     * .capers/ -- 存放在您的 lab12 文件夹中的所有持久数据的顶级文件夹
+     *    - dogs/ -- 包含所有狗的持久数据的文件夹
+     *    - story -- 包含当前故事的文件
      */
     public static void setupPersistence() {
-        // TODO
+        // 创建文件夹.capers/
+        try {
+            CAPERS_FOLDER.mkdir(); // 目录存在时，则不做任何操作
+        }
+        catch (SecurityException e) {
+            throw error("Can not create the Capers dictionary");
+        }
+
+        // 创建子文件夹- dogs/
+        try {
+            Dog.DOG_FOLDER.mkdir();
+        }
+        catch (SecurityException e) {
+            throw error("Can not create the Dogs dictionary");
+        }
+
+        // 创建文件- story
+        try {
+            STORY_FILE.createNewFile();
+        }
+        catch (IOException e) {
+            throw error("Can not create the story file");
+        }
     }
 
     /**
-     * Appends the first non-command argument in args
-     * to a file called `story` in the .capers directory.
-     * @param text String of the text to be appended to the story
+     * 将 args 中的第一个非命令参数附加到名为 `story` 的文件中，
+     * 该文件位于 .capers 目录中。
+     * 打印出故事文件
+     * @param text 要附加到故事中的文本字符串
      */
     public static void writeStory(String text) {
-        // TODO
+        // 创建文件系统操作以实现持久性
+        CAPERS_FOLDER.mkdir();
+
+        // 将text写入.capers目录中的story.txt文件中
+        String oldContent = Utils.readContentsAsString(STORY_FILE);
+        Utils.writeContents(STORY_FILE, oldContent, text, "\n");
+
+        // 打印出新的故事内容
+        System.out.println(Utils.readContentsAsString(STORY_FILE));
     }
 
     /**
-     * Creates and persistently saves a dog using the first
-     * three non-command arguments of args (name, breed, age).
-     * Also prints out the dog's information using toString().
+     * 使用 args 的前三个非命令参数（名字、品种、年龄）创建并持久保存一只狗。
+     * 还使用 toString() 打印出狗的信息。
      */
     public static void makeDog(String name, String breed, int age) {
-        // TODO
+        // 创建文件系统操作以实现持久性
+        CAPERS_FOLDER.mkdir();
+
+        // 创建一只狗对象
+        Dog newDog = new Dog(name, breed, age);
+
+        // 将狗对象保存到文件
+        newDog.saveDog();
+
+        // 打印出狗信息
+        System.out.println(newDog.toString());
     }
 
     /**
-     * Advances a dog's age persistently and prints out a celebratory message.
-     * Also prints out the dog's information using toString().
-     * Chooses dog to advance based on the first non-command argument of args.
-     * @param name String name of the Dog whose birthday we're celebrating.
+     * 永久提前一只狗的年龄，并打印出庆祝消息。
+     * 还使用 toString() 打印出狗的信息。
+     * 根据 args 的第一个非命令参数选择要提前的狗。
+     * @param name 要庆祝生日的狗的名字字符串
      */
     public static void celebrateBirthday(String name) {
-        // TODO
+        // 反序列化狗对象（假设name的狗已存在）
+        Dog oldDog = Dog.fromFile(name);
+
+        // 增加狗的年龄并庆祝
+        oldDog.haveBirthday();
+
+        // 将新的狗信息，保存到文件
+        oldDog.saveDog();
     }
 }

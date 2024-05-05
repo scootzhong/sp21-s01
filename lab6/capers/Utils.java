@@ -19,16 +19,15 @@ import java.util.Formatter;
 import java.util.List;
 
 
-/** Assorted utilities.
+/** 各种实用工具。
  *  @author P. N. Hilfinger
  */
 class Utils {
 
-    /* READING AND WRITING FILE CONTENTS */
+    /* 读取和写入文件内容 */
 
-    /** Return the entire contents of FILE as a byte array.  FILE must
-     *  be a normal file.  Throws IllegalArgumentException
-     *  in case of problems. */
+    /** 返回 FILE 的全部内容作为字节数组。FILE 必须是普通文件。
+     *  如果出现问题，则抛出 IllegalArgumentException。 */
     static byte[] readContents(File file) {
         if (!file.isFile()) {
             throw new IllegalArgumentException("must be a normal file");
@@ -40,22 +39,19 @@ class Utils {
         }
     }
 
-    /** Return the entire contents of FILE as a String.  FILE must
-     *  be a normal file.  Throws IllegalArgumentException
-     *  in case of problems. */
+    /** 返回 FILE 的全部内容作为字符串。FILE 必须是普通文件。
+     *  如果出现问题，则抛出 IllegalArgumentException。 */
     static String readContentsAsString(File file) {
         return new String(readContents(file), StandardCharsets.UTF_8);
     }
 
-    /** Write the result of concatenating the bytes in CONTENTS to FILE,
-     *  creating or overwriting it as needed.  Each object in CONTENTS may be
-     *  either a String or a byte array.  Throws IllegalArgumentException
-     *  in case of problems. */
+    /** 将 CONTENTS 中的字节连接起来并写入 FILE，根据需要创建或覆盖它。
+     *  CONTENTS 中的每个对象都可以是 String 或 byte 数组。
+     *  如果出现问题，则抛出 IllegalArgumentException。 */
     static void writeContents(File file, Object... contents) {
         try {
             if (file.isDirectory()) {
-                throw
-                        new IllegalArgumentException("cannot overwrite directory");
+                throw new IllegalArgumentException("cannot overwrite directory");
             }
             BufferedOutputStream str =
                     new BufferedOutputStream(Files.newOutputStream(file.toPath()));
@@ -72,8 +68,8 @@ class Utils {
         }
     }
 
-    /** Return an object of type T read from FILE, casting it to EXPECTEDCLASS.
-     *  Throws IllegalArgumentException in case of problems. */
+    /** 返回从 FILE 中读取的类型为 T 的对象，将其转换为 EXPECTEDCLASS。
+     *  如果出现问题，则抛出 IllegalArgumentException。 */
     static <T extends Serializable> T readObject(File file,
                                                  Class<T> expectedClass) {
         try {
@@ -83,37 +79,35 @@ class Utils {
             in.close();
             return result;
         } catch (IOException | ClassCastException
-                | ClassNotFoundException excp) {
+                 | ClassNotFoundException excp) {
             throw new IllegalArgumentException(excp.getMessage());
         }
     }
 
-    /** Write OBJ to FILE. */
+    /** 将 OBJ 写入 FILE。 */
     static void writeObject(File file, Serializable obj) {
         writeContents(file, serialize(obj));
     }
 
 
-    /* OTHER FILE UTILITIES */
+    /* 其他文件实用工具 */
 
-    /** Return the concatentation of FIRST and OTHERS into a File designator,
-     *  analogous to the {@link java.nio.file.Paths.#get(String, String[])}
-     *  method. */
+    /** 将 FIRST 和 OTHERS 连接成一个 File 指示符，
+     *  类似于 java.nio.file.Paths.#get(String, String[]) 方法。 */
     static File join(String first, String... others) {
         return Paths.get(first, others).toFile();
     }
 
-    /** Return the concatentation of FIRST and OTHERS into a File designator,
-     *  analogous to the {@link java.nio.file.Paths.#get(String, String[])}
-     *  method. */
+    /** 将 FIRST 和 OTHERS 连接成一个 File 指示符，
+     *  类似于 java.nio.file.Paths.#get(String, String[]) 方法。 */
     static File join(File first, String... others) {
         return Paths.get(first.getPath(), others).toFile();
     }
 
 
-    /* SERIALIZATION UTILITIES */
+    /* 序列化实用工具 */
 
-    /** Returns a byte array containing the serialized contents of OBJ. */
+    /** 返回包含 OBJ 的序列化内容的字节数组。 */
     static byte[] serialize(Serializable obj) {
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -128,15 +122,15 @@ class Utils {
 
 
 
-    /* MESSAGES AND ERROR REPORTING */
+    /* 消息和错误报告 */
 
     /**
-     * Prints out MESSAGE and exits with error code -1.
-     * Note:
-     *     The functionality for erroring/exit codes is different within Gitlet
-     *     so DO NOT use this as a reference.
-     *     Refer to the spec for more information.
-     * @param message message to print
+     * 打印 MESSAGE 并以错误代码 -1 退出。
+     * 注意：
+     *     错误/退出代码的功能在 Gitlet 中是不同的，
+     *     所以不要将此用作参考。
+     *     有关更多信息，请参阅规范。
+     * @param message 要打印的消息
      */
     public static void exitWithError(String message) {
         if (message != null && !message.equals("")) {
@@ -145,8 +139,7 @@ class Utils {
         System.exit(-1);
     }
 
-    /** Return a RuntimeException whose message is composed from MSG and ARGS as
-     *  for the String.format method. */
+    /** 返回一个消息为 MSG 和 ARGS 组成的 RuntimeException，就像 String.format 方法一样。 */
     static RuntimeException error(String msg, Object... args) {
         return new RuntimeException(String.format(msg, args));
     }
