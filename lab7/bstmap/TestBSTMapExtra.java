@@ -5,15 +5,15 @@ import java.util.HashSet;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-/** Tests of optional parts of lab 7. */
+/** 实验7的可选部分的测试。 */
 public class TestBSTMapExtra {
 
     /*
-    * Sanity test for keySet, only here because it's optional
-    */
+     * keySet的基本测试，因为它是可选的
+     */
     @Test
     public void sanityKeySetTest() {
-    	BSTMap<String, Integer> b = new BSTMap<String, Integer>();
+        BSTMap<String, Integer> b = new BSTMap<String, Integer>();
         HashSet<String> values = new HashSet<String>();
         for (int i = 0; i < 455; i++) {
             b.put("hi" + i, 1);
@@ -25,17 +25,17 @@ public class TestBSTMapExtra {
         assertTrue(keySet.containsAll(values));
     }
 
-    /* Remove Test
+    /* 删除测试
      *
-     * Note for testRemoveRoot:
+     * 注释testRemoveRoot：
      *
-     * Just checking that c is gone (perhaps incorrectly)
-     * assumes that remove is BST-structure preserving.
+     * 只检查c是否消失（可能不正确）
+     * 假设remove保留了BST结构。
      *
-     * More exhaustive tests could be done to verify
-     * implementation of remove, but that would require doing
-     * things like checking for inorder vs. preorder swaps,
-     * and is unnecessary in this simple BST implementation.
+     * 可以进行更详尽的测试以验证
+     * 删除的实现，但这需要做一些事情
+     * 例如检查中序与前序交换，
+     * 在这个简单的BST实现中是不必要的。
      */
     @Test
     public void testRemoveRoot() {
@@ -53,8 +53,8 @@ public class TestBSTMapExtra {
         assertTrue(q.containsKey("e"));
     }
 
-    /* Remove Test 2
-     * test the 3 different cases of remove
+    /* 删除测试2
+     * 测试删除的3种不同情况
      */
     @Test
     public void testRemoveThreeCases() {
@@ -80,9 +80,8 @@ public class TestBSTMapExtra {
         assertTrue(q.containsKey("f"));
     }
 
-    /* Remove Test 3
-    *  Checks that remove works correctly on root nodes
-    *  when the node has only 1 or 0 children on either side. */
+    /* 删除测试3
+     *  检查当根节点只有1个或0个子节点时，删除是否在根节点上正常工作。 */
     @Test
     public void testRemoveRootEdge() {
         BSTMap rightChild = new BSTMap();

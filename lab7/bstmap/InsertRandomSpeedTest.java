@@ -6,22 +6,21 @@ import java.io.IOException;
 import java.util.Scanner;
 import edu.princeton.cs.algs4.Stopwatch;
 
-/** Performs a timing test on three different set implementations.
- *  @author Josh Hug
- *  @author Brendan Hu
+/** 对三种不同的集合实现进行时间测试。
+ *  作者：Josh Hug
+ *  作者：Brendan Hu
  */
 public class InsertRandomSpeedTest {
     /**
-        Requests user input and performs tests of three different set
-        implementations. ARGS is unused.
-    */
+     请求用户输入并对三种不同的集合实现执行测试。ARGS未使用。
+     */
     public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
 
         System.out.println("This program inserts random "
-                           + "Strings of length L "
-                           + "into different types of maps "
-                           + "as <String, Integer> pairs.");
+                + "Strings of length L "
+                + "into different types of maps "
+                + "as <String, Integer> pairs.");
         System.out.print("Please enter desired length of each string: ");
         int L = waitForPositiveInt(input);
 
@@ -40,8 +39,7 @@ public class InsertRandomSpeedTest {
         input.close();
     }
 
-    /** Returns time needed to put N random strings of length L into the
-      * Map61B 61bMap. */
+    /** 返回将N个长度为L的随机字符串插入到Map61B中所需的时间。 */
     public static double insertRandom(Map61B<String, Integer> map61B, int N, int L) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
@@ -52,8 +50,7 @@ public class InsertRandomSpeedTest {
         return sw.elapsedTime();
     }
 
-    /** Returns time needed to put N random strings of length L into the
-      * TreeMap treeMap. */
+    /** 返回将N个长度为L的随机字符串插入到TreeMap中所需的时间。 */
     public static double insertRandom(TreeMap<String, Integer> treeMap, int N, int L) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
@@ -64,8 +61,7 @@ public class InsertRandomSpeedTest {
         return sw.elapsedTime();
     }
 
-    /** Returns time needed to put N random strings of length L into the
-     * HashMap treeMap. */
+    /** 返回将N个长度为L的随机字符串插入到HashMap中所需的时间。 */
     public static double insertRandom(HashMap<String, Integer> treeMap, int N, int L) {
         Stopwatch sw = new Stopwatch();
         String s = "cat";
@@ -77,10 +73,10 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-        Attempts to insert N random strings of length L into map,
-        Prints time of the N insert calls, otherwise
-        Prints a nice message about the error
-    */
+     尝试将N个长度为L的随机字符串插入到map中，
+     打印N次插入调用的时间，否则
+     打印有关错误的详细信息
+     */
     public static void timeRandomMap61B(Map61B<String, Integer> map, int N, int L) {
         try {
             double mapTime = insertRandom(map, N, L);
@@ -93,10 +89,10 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-        Attempts to insert N random strings of length L into a TreeMap
-        Prints time of the N insert calls, otherwise
-        Prints a nice message about the error
-    */
+     尝试将N个长度为L的随机字符串插入到TreeMap中，
+     打印N次插入调用的时间，否则
+     打印有关错误的详细信息
+     */
     public static void timeRandomTreeMap(TreeMap<String, Integer> treeMap, int N, int L) {
         try {
             double javaTime = insertRandom(treeMap, N, L);
@@ -109,10 +105,10 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-    Attempts to insert N random strings of length L into a HashMap
-    Prints time of the N insert calls, otherwise
-    Prints a nice message about the error
-    */
+     尝试将N个长度为L的随机字符串插入到HashMap中，
+     打印N次插入调用的时间，否则
+     打印有关错误的详细信息
+     */
     public static void timeRandomHashMap(HashMap<String, Integer> hashMap, int N, int L) {
         try {
             double javaTime = insertRandom(hashMap, N, L);
@@ -125,10 +121,9 @@ public class InsertRandomSpeedTest {
     }
 
     /**
-        Waits for the user on other side of Scanner
-        to enter a positive int,
-        and outputs that int
-    */
+     等待Scanner的另一侧的用户输入一个正整数，
+     并输出该整数
+     */
     public static int waitForPositiveInt(Scanner input) {
         int ret = 0;
         do {
@@ -143,15 +138,15 @@ public class InsertRandomSpeedTest {
     }
     /* ------------------------------- Private methods ------------------------------- */
     /**
-        To be called after catching a StackOverflowError
-        Prints the error with corresponding N and L
-    */
+     在捕获StackOverflowError后调用
+     打印错误以及相应的N和L
+     */
     private static void printInfoOnStackOverflow(int N, int L) {
         System.out.println("--Stack Overflow -- couldn't add " + N
-                            + " strings of length " + L + ".");
+                + " strings of length " + L + ".");
     }
 
-    /** Prints a nice message for the user on bad input */
+    /** 为用户提供有关错误输入的友好消息 */
     private static void errorBadIntegerInput() {
         System.out.print("Please enter a positive integer: ");
     }

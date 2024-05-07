@@ -2,41 +2,41 @@ package bstmap;
 
 import java.util.Set;
 
-/* Your implementation BSTMap should implement this interface. To do so,
- * append "implements Map61B<K,V>" to the end of your "public class..."
- * declaration, though you can use other formal type parameters if you'd like.
+/* 你的BSTMap实现应该实现这个接口。为此，将“implements Map61B<K,V>”附加到你的“public class...”声明的末尾，尽管你可以使用其他形式的类型参数。
  */
 public interface Map61B<K, V> extends Iterable<K> {
 
-    /** Removes all of the mappings from this map. */
+    /** 清除此映射中的所有映射。 */
     void clear();
 
-    /* Returns true if this map contains a mapping for the specified key. */
+    /** 如果此映射包含指定键的映射，则返回true。 */
     boolean containsKey(K key);
 
-    /* Returns the value to which the specified key is mapped, or null if this
-     * map contains no mapping for the key.
+    /** 返回指定键映射到的值，如果此映射不包含键的映射，则返回null。
      */
     V get(K key);
 
-    /* Returns the number of key-value mappings in this map. */
+    /** 返回此映射中键-值映射的数量。 */
     int size();
 
-    /* Associates the specified value with the specified key in this map. */
+    /** 在此映射中将指定值与指定键关联。 */
     void put(K key, V value);
 
-    /* Returns a Set view of the keys contained in this map. Not required for Lab 7.
-     * If you don't implement this, throw an UnsupportedOperationException. */
-    Set<K> keySet();
+    /** 返回此映射中包含的键的Set视图。对于实验7不是必需的。
+     * 如果你不实现这个，抛出UnsupportedOperationException。 */
+    default Set<K> keySet() {
+        throw new UnsupportedOperationException();
+    }
 
-    /* Removes the mapping for the specified key from this map if present.
-     * Not required for Lab 7. If you don't implement this, throw an
-     * UnsupportedOperationException. */
-    V remove(K key);
+    /** 如果存在，则从此映射中移除指定键的映射。
+     * 对于实验7不是必需的。如果你不实现这个，抛出UnsupportedOperationException。 */
+    default V remove(K key) {
+        throw new UnsupportedOperationException();
+    }
 
-    /* Removes the entry for the specified key only if it is currently mapped to
-     * the specified value. Not required for Lab 7. If you don't implement this,
-     * throw an UnsupportedOperationException.*/
-    V remove(K key, V value);
+    /** 仅在当前映射到指定值的情况下删除指定键的条目。对于实验7不是必需的。如果你不实现这个，抛出UnsupportedOperationException。*/
+    default V remove(K key, V value) {
+        throw new UnsupportedOperationException();
+    }
 
 }

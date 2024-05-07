@@ -3,15 +3,14 @@ package bstmap;
 import java.util.Iterator;
 import java.util.Set;
 
-/** A data structure that uses a linked list to store pairs of keys and values.
- *  Any key must appear at most once in the dictionary, but values may appear multiple
- *  times. Key operations are get(key), put(key, value), and contains(key) methods. The value
- *  associated to a key is the value in the last call to put with that key. */
+/** 使用链表存储键值对的数据结构。
+ *  字典中的任何键最多只能出现一次，但值可能多次出现。
+ *  关键操作是get(key)、put(key, value)和contains(key)方法。与键关联的值是与该键的上一次put调用中的值。 */
 public class ULLMap<K, V>  implements Map61B<K, V> {
 
     int size = 0;
 
-    /** Returns the value corresponding to KEY or null if no such value exists. */
+    /** 返回与KEY对应的值，如果没有这样的值存在则返回null。 */
     public V get(K key) {
         if (list == null) {
             return null;
@@ -28,15 +27,14 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         return size;
     }
 
-    /** Removes all of the mappings from this map. */
+    /** 删除此地图中的所有映射。 */
     @Override
     public void clear() {
         size = 0;
         list = null;
     }
 
-    /** Inserts the key-value pair of KEY and VALUE into this dictionary,
-     *  replacing the previous value associated to KEY, if any. */
+    /** 将KEY和VALUE的键值对插入此字典中，替换键关联的以前的值（如果有）。 */
     public void put(K key, V val) {
         if (list != null) {
             Entry lookup = list.get(key);
@@ -51,8 +49,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         }
     }
 
-    /** Returns true if and only if this dictionary contains KEY as the
-     *  key of some key-value pair. */
+    /** 当且仅当此字典包含KEY作为某些键值对的键时返回true。 */
     public boolean containsKey(K key) {
         if (list == null) {
             return false;
@@ -65,24 +62,21 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         return new ULLMapIter();
     }
 
-    /** Keys and values are stored in a linked list of Entry objects.
-     *  This variable stores the first pair in this linked list. */
+    /** 键和值存储在链表的Entry对象中。
+     *  这个变量存储了这个链表中的第一个对。 */
     private Entry list;
 
-    /** Represents one node in the linked list that stores the key-value pairs
-     *  in the dictionary. */
+    /** 表示存储字典中键值对的链表中的一个节点。 */
     private class Entry {
 
-        /** Stores KEY as the key in this key-value pair, VAL as the value, and
-         *  NEXT as the next node in the linked list. */
+        /** 将KEY存储为此键值对中的键，将VAL存储为值，并将NEXT存储为链表中的下一个节点。 */
         Entry(K k, V v, Entry n) {
             key = k;
             val = v;
             next = n;
         }
 
-        /** Returns the Entry in this linked list of key-value pairs whose key
-         *  is equal to KEY, or null if no such Entry exists. */
+        /** 返回此键值对链表中键等于KEY的Entry，如果没有这样的Entry存在则返回null。 */
         Entry get(K k) {
             if (k != null && k.equals(key)) {
                 return this;
@@ -93,20 +87,19 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
             return next.get(key);
         }
 
-        /** Stores the key of the key-value pair of this node in the list. */
+        /** 将此节点列表中的键的键值对存储。 */
         K key;
-        /** Stores the value of the key-value pair of this node in the list. */
+        /** 将此节点列表中的键的值存储。 */
         V val;
-        /** Stores the next Entry in the linked list. */
+        /** 存储链表中的下一个Entry。 */
         Entry next;
 
     }
 
-    /** An iterator that iterates over the keys of the dictionary. */
+    /** 迭代字典键的迭代器。 */
     private class ULLMapIter implements Iterator<K> {
 
-        /** Create a new ULLMapIter by setting cur to the first node in the
-         *  linked list that stores the key-value pairs. */
+        /** 通过将cur设置为存储键值对的链表中的第一个节点来创建一个新的ULLMapIter。 */
         public ULLMapIter() {
             cur = list;
         }
@@ -123,7 +116,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
             return ret;
         }
 
-        /** Stores the current key-value pair. */
+        /** 存储当前键值对。 */
         private Entry cur;
 
     }
