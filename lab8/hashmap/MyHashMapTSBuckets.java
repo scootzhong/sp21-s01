@@ -5,38 +5,35 @@ import java.util.Comparator;
 import java.util.TreeSet;
 
 /**
- * Hash Table with Tree Set buckets
- * Elements of tree sets need to be comparable, so we restrict our map to
- * only allow comparable keys
+ * 使用TreeSet作为桶的哈希表
+ * 树集合中的元素需要可比较，因此我们限制我们的地图只接受可比较的键
  *
  * @author Neil Kulkarni
  */
 public class MyHashMapTSBuckets<K extends Comparable<K>, V> extends MyHashMap<K, V> {
 
     /**
-     * Constructor that creates a backing array with default
-     * initial size and load factor
+     * 构造函数，创建默认初始大小和负载因子的背景区
      */
     public MyHashMapTSBuckets() {
         super();
     }
 
     /**
-     * Constructor that creates a backing array of initialSize
-     * and default load factor
+     * 构造函数，创建初始大小为initialSize的背景区和默认负载因子
      *
-     * @param initialSize initial size of backing array
+     * @param initialSize 背景区的初始大小
      */
     public MyHashMapTSBuckets(int initialSize) {
         super(initialSize);
     }
 
     /**
-     * Constructor that creates a backing array of initialSize.
-     * The load factor (# items / # buckets) should always be <= loadFactor
+     * 构造函数，创建初始大小为initialSize的背景区。
+     * 负载因子（# items / # buckets）应始终小于等于loadFactor
      *
-     * @param initialSize initial size of backing array
-     * @param maxLoad maximum load factor
+     * @param initialSize 背景区的初始大小
+     * @param maxLoad 最大负载因子
      */
     public MyHashMapTSBuckets(int initialSize, double maxLoad) {
         super(initialSize, maxLoad);
@@ -44,13 +41,13 @@ public class MyHashMapTSBuckets<K extends Comparable<K>, V> extends MyHashMap<K,
 
     @Override
     protected Collection<Node> createBucket() {
-        // This is fancy new-fangled Java that says in plain English:
+        // 这是Java的高级特性，用直白的英语解释就是：
         //
-        //  "Build a TreeSet of Nodes, and when you compare two Nodes,
-        //   compare their keys by their key's compareTo method"
+        // "创建一个Node的TreeSet，当比较两个Node时，
+        //  使用它们的key的compareTo方法进行比较"
         //
-        // Remember, we had K extends Comparable<K> in our class header,
-        // so we know the keys have implemented a compareTo method
+        // 因为我们已经在类头定义了K extends Comparable<K>，我们知道键已经实现了compareTo方法
         return new TreeSet<>(Comparator.comparing(a -> a.key));
     }
 }
+

@@ -2,48 +2,44 @@ package hashmap;
 
 import java.util.Set;
 /**
- * Your implementation hashmap.MyHashMap should implement this interface. To do so,
- * append "implements hashmap.Map61B<K, V>" to the end of your "public class..."
- * declaration, though you can use other formal type parameters if you'd like.
+ * 你的实现应该扩展hashmap.MyHashMap并实现这个接口。为此，在你的"public class..."声明的末尾添加"implements hashmap.Map61B<K, V>"，
+ * 尽管你可以使用其他形式的类型参数，如果你愿意的话。
  */
 public interface Map61B<K, V> extends Iterable<K> {
-    /** Removes all of the mappings from this map. */
+    /** 清除此地图中所有的映射。 */
     void clear();
 
-    /** Returns true if this map contains a mapping for the specified key. */
+    /** 如果此地图包含指定键的映射，则返回true。 */
     boolean containsKey(K key);
 
     /**
-     * Returns the value to which the specified key is mapped, or null if this
-     * map contains no mapping for the key.
+     * 返回指定键所映射的值，如果此地图不包含该键的映射，则返回null。
      */
     V get(K key);
 
-    /** Returns the number of key-value mappings in this map. */
+    /** 返回此地图中的键值映射数量。 */
     int size();
 
     /**
-     * Associates the specified value with the specified key in this map.
-     * If the map previously contained a mapping for the key,
-     * the old value is replaced.
+     * 将指定的值与指定的键关联到此地图中。如果地图之前包含该键的映射，
+     * 则替换旧值。
      */
     void put(K key, V value);
 
-    /** Returns a Set view of the keys contained in this map. */
+    /** 返回此地图中包含的键的Set视图。 */
     Set<K> keySet();
 
     /**
-     * Removes the mapping for the specified key from this map if present.
-     * Not required for Lab 8. If you don't implement this, throw an
-     * UnsupportedOperationException.
+     * 如果存在，则从此地图中删除指定键的映射。这不是Lab 8的要求。
+     * 如果你没有实现此功能，抛出UnsupportedOperationException。
      */
     V remove(K key);
 
     /**
-     * Removes the entry for the specified key only if it is currently mapped to
-     * the specified value. Not required for Lab 8. If you don't implement this,
-     * throw an UnsupportedOperationException.
+     * 如果当前映射到指定值，则仅删除指定键的条目。这不是Lab 8的要求。
+     * 如果你没有实现此功能，抛出UnsupportedOperationException。
      */
     V remove(K key, V value);
 }
+
 

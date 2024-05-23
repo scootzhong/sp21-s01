@@ -4,14 +4,15 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests by Brendan Hu, Spring 2015
- * Revised for 2016 by Josh Hug
- * Revised for 2021 by Neil Kulkarni
+ * 由Brendan Hu在2015年春季编写的测试
+ * 2016年由Josh Hug修订
+ * 2021年由Neil Kulkarni修订
  */
 public class TestMyHashMapBuckets {
 
     @Test
     public void sanityGenericsTest() {
+        // 测试不同类型的MyHashMap实现
         MyHashMap<String, Integer> a = new MyHashMapALBuckets<>();
         MyHashMap<String, Integer> b = new MyHashMapALBuckets<>();
         MyHashMap<Integer, String> c = new MyHashMapALBuckets<>();
@@ -38,9 +39,10 @@ public class TestMyHashMapBuckets {
         d = new MyHashMapPQBuckets<>();
     }
 
-    //assumes put/size/containsKey/get work
+    // 假设put/size/containsKey/get功能正常
     @Test
     public void sanityClearTest() {
+        // 测试不同类型的MyHashMap实现的clear方法
         TestMyHashMap.sanityClearTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanityClearTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanityClearTest(new MyHashMapTSBuckets<>());
@@ -48,9 +50,10 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanityClearTest(new MyHashMapPQBuckets<>());
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanityContainsKeyTest() {
+        // 测试不同类型的MyHashMap实现的containsKey方法
         TestMyHashMap.sanityContainsKeyTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanityContainsKeyTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanityContainsKeyTest(new MyHashMapTSBuckets<>());
@@ -58,9 +61,10 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanityContainsKeyTest(new MyHashMapPQBuckets<>());
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanityGetTest() {
+        // 测试不同类型的MyHashMap实现的get方法
         TestMyHashMap.sanityGetTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanityGetTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanityGetTest(new MyHashMapTSBuckets<>());
@@ -68,9 +72,10 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanityGetTest(new MyHashMapPQBuckets<>());
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanitySizeTest() {
+        // 测试不同类型的MyHashMap实现的size方法
         TestMyHashMap.sanitySizeTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanitySizeTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanitySizeTest(new MyHashMapTSBuckets<>());
@@ -78,9 +83,10 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanitySizeTest(new MyHashMapPQBuckets<>());
     }
 
-    //assumes get/containskey work
+    // 假设get/containsKey功能正常
     @Test
     public void sanityPutTest() {
+        // 测试不同类型的MyHashMap实现的put方法
         TestMyHashMap.sanityPutTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanityPutTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanityPutTest(new MyHashMapTSBuckets<>());
@@ -90,6 +96,7 @@ public class TestMyHashMapBuckets {
 
     @Test
     public void sanityKeySetTest() {
+        // 测试不同类型的MyHashMap实现的keySet方法
         TestMyHashMap.sanityKeySetTest(new MyHashMapALBuckets<>());
         TestMyHashMap.sanityKeySetTest(new MyHashMapLLBuckets<>());
         TestMyHashMap.sanityKeySetTest(new MyHashMapTSBuckets<>());
@@ -97,9 +104,10 @@ public class TestMyHashMapBuckets {
         TestMyHashMap.sanityKeySetTest(new MyHashMapPQBuckets<>());
     }
 
-    // Test for general functionality and that the properties of Maps hold.
+    // 测试一般功能及Map属性保持不变
     @Test
     public void functionalityTest() {
+        // 测试不同类型的MyHashMap实现的一般功能
         TestMyHashMap.functionalityTest(new MyHashMapALBuckets<>(), new MyHashMapALBuckets<>());
         TestMyHashMap.functionalityTest(new MyHashMapLLBuckets<>(), new MyHashMapLLBuckets<>());
         TestMyHashMap.functionalityTest(new MyHashMapTSBuckets<>(), new MyHashMapTSBuckets<>());

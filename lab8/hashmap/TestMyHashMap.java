@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Tests by Brendan Hu, Spring 2015
- * Revised for 2016 by Josh Hug
- * Revised for 2021 by Neil Kulkarni
+ * 测试类，由Brendan Hu在2015年春季编写
+ * 2016年由Josh Hug修订
+ * 2021年由Neil Kulkarni修订
  */
 public class TestMyHashMap {
 
@@ -21,7 +21,7 @@ public class TestMyHashMap {
         MyHashMap<Boolean, Integer> d = new MyHashMap<>();
     }
 
-    //assumes put/size/containsKey/get work
+    // 假设put/size/containsKey/get功能正常
     @Test
     public void sanityClearTest() {
         sanityClearTest(new MyHashMap<>());
@@ -30,7 +30,7 @@ public class TestMyHashMap {
     public static void sanityClearTest(MyHashMap<String, Integer> b) {
         for (int i = 0; i < 455; i++) {
             b.put("hi" + i, 1);
-            //make sure put is working via containsKey and get
+            // 通过containsKey和get检查put是否工作
             assertTrue(null != b.get("hi" + i)
                     && b.containsKey("hi" + i));
         }
@@ -41,7 +41,7 @@ public class TestMyHashMap {
         }
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanityContainsKeyTest() {
         sanityContainsKeyTest(new MyHashMap<>());
@@ -53,7 +53,7 @@ public class TestMyHashMap {
         assertTrue(b.containsKey("waterYouDoingHere"));
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanityGetTest() {
         sanityGetTest(new MyHashMap<>());
@@ -68,7 +68,7 @@ public class TestMyHashMap {
         assertNotEquals(null, b.get("starChild"));
     }
 
-    // assumes put works
+    // 假设put功能正常
     @Test
     public void sanitySizeTest() {
         sanitySizeTest(new MyHashMap<>());
@@ -84,7 +84,7 @@ public class TestMyHashMap {
         assertEquals(456, b.size());
     }
 
-    //assumes get/containskey work
+    // 假设get/containsKey功能正常
     @Test
     public void sanityPutTest() {
         sanityPutTest(new MyHashMap<>());
@@ -106,13 +106,13 @@ public class TestMyHashMap {
             b.put("hi" + i, 1);
             values.add("hi" + i);
         }
-        assertEquals(455, b.size()); //keys are there
+        assertEquals(455, b.size()); // 键存在
         Set<String> keySet = b.keySet();
         assertTrue(values.containsAll(keySet));
         assertTrue(keySet.containsAll(values));
     }
 
-    // Test for general functionality and that the properties of Maps hold.
+    // 测试一般功能以及Map的性质保持不变
     @Test
     public void functionalityTest() {
         functionalityTest(new MyHashMap<>(), new MyHashMap<>());
@@ -122,18 +122,18 @@ public class TestMyHashMap {
                                    MyHashMap<String, Integer> studentIDs) {
         assertEquals(0, dictionary.size());
 
-        // can put objects in dictionary and get them
+        // 可以在字典中放入对象并获取它们
         dictionary.put("hello", "world");
         assertTrue(dictionary.containsKey("hello"));
         assertEquals("world", dictionary.get("hello"));
         assertEquals(1, dictionary.size());
 
-        // putting with existing key updates the value
+        // 使用已存在的键更新值
         dictionary.put("hello", "kevin");
         assertEquals(1, dictionary.size());
         assertEquals("kevin", dictionary.get("hello"));
 
-        // putting key in multiple times does not affect behavior
+        // 多次插入相同的键不会影响行为
         studentIDs.put("sarah", 12345);
         assertEquals(1, studentIDs.size());
         assertEquals(12345, studentIDs.get("sarah").intValue());
@@ -152,7 +152,7 @@ public class TestMyHashMap {
         assertTrue(studentIDs.containsKey("sarah"));
         assertTrue(studentIDs.containsKey("alan"));
 
-        // handle values being the same
+        // 处理值相同的情况
         assertEquals(345, studentIDs.get("alan").intValue());
         studentIDs.put("evil alan", 345);
         assertEquals(345, studentIDs.get("evil alan").intValue());

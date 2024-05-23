@@ -4,35 +4,33 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Hash Table with Array List buckets
+ * 使用ArrayList作为桶的哈希表
  * @author Neil Kulkarni
  */
 public class MyHashMapALBuckets<K, V> extends MyHashMap<K, V> {
 
     /**
-     * Constructor that creates a backing array with default
-     * initial size and load factor
+     * 构造函数，创建默认初始大小和负载因子的背景区
      */
     public MyHashMapALBuckets() {
         super();
     }
 
     /**
-     * Constructor that creates a backing array of initialSize
-     * and default load factor
+     * 构造函数，创建初始大小为initialSize的背景区和默认负载因子
      *
-     * @param initialSize initial size of backing array
+     * @param initialSize 背景区的初始大小
      */
     public MyHashMapALBuckets(int initialSize) {
         super(initialSize);
     }
 
     /**
-     * Constructor that creates a backing array of initialSize.
-     * The load factor (# items / # buckets) should always be <= loadFactor
+     * 构造函数，创建初始大小为initialSize的背景区。
+     * 负载因子（# items / # buckets）应始终小于等于loadFactor
      *
-     * @param initialSize initial size of backing array
-     * @param maxLoad maximum load factor
+     * @param initialSize 背景区的初始大小
+     * @param maxLoad 最大负载因子
      */
     public MyHashMapALBuckets(int initialSize, double maxLoad) {
         super(initialSize, maxLoad);

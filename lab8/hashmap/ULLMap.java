@@ -4,15 +4,17 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * A data structure that uses a linked list to store pairs of keys and values.
- * Any key must appear at most once in the dictionary, but values may appear multiple
- * times. Key operations are get(key), put(key, value), and contains(key) methods. The value
- * associated to a key is the value in the last call to put with that key.
+ * 一个使用链表存储键值对的数据结构。
+ * 任何键最多在字典中出现一次，但值可以多次出现。
+ * 键操作包括get(key)，put(key, value)和contains(key)方法。
+ * 关联到一个键的值是最后一次调用put时传入的那个值。
  */
-public class ULLMap<K, V>  implements Map61B<K, V> {
+public class ULLMap<K, V> implements Map61B<K, V> {
     int size = 0;
 
-    /** Returns the value corresponding to KEY or null if no such value exists. */
+    /**
+     * 返回与KEY关联的值，如果不存在则返回null。
+     */
     public V get(K key) {
         if (list == null) {
             return null;
@@ -29,7 +31,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         return size;
     }
 
-    /** Removes all of the mappings from this map. */
+    /** 删除此映射中的所有键值对。 */
     @Override
     public void clear() {
         size = 0;
@@ -37,8 +39,8 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
     }
 
     /**
-     * Inserts the key-value pair of KEY and VALUE into this dictionary,
-     * replacing the previous value associated to KEY, if any.
+     * 将键值对KEY和VALUE插入到字典中，
+     * 替换与KEY关联的先前值，如果有的话。
      */
     public void put(K key, V val) {
         if (list != null) {
@@ -56,8 +58,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
     }
 
     /**
-     * Returns true if and only if this dictionary contains KEY as the
-     * key of some key-value pair.
+     * 如果此字典包含某个键值对的KEY，则返回true。
      */
     public boolean containsKey(K key) {
         if (list == null) {
@@ -72,20 +73,18 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
     }
 
     /**
-     * Keys and values are stored in a linked list of Entry objects.
-     * This variable stores the first pair in this linked list.
+     * 键值对存储在Entry对象的链表中。
+     * 此变量存储链表中的第一个键值对。
      */
     private Entry list;
 
     /**
-     * Represents one node in the linked list that stores the key-value pairs
-     * in the dictionary.
+     * 表示链表中存储字典中键值对的一个节点。
      */
     private class Entry {
-        
+
         /**
-         * Stores KEY as the key in this key-value pair, VAL as the value, and
-         * NEXT as the next node in the linked list.
+         * 使用给定的KEY作为键，VAL作为值，NEXT作为链表中的下一个节点来存储键值对。
          */
         Entry(K k, V v, Entry n) {
             key = k;
@@ -94,8 +93,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         }
 
         /**
-         * Returns the Entry in this linked list of key-value pairs whose key
-         * is equal to KEY, or null if no such Entry exists.
+         * 返回链表中键为KEY的Entry，如果不存在则返回null。
          */
         Entry get(K k) {
             if (k != null && k.equals(key)) {
@@ -107,21 +105,20 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
             return next.get(k);
         }
 
-        /** Stores the key of the key-value pair of this node in the list. */
+        /** 存储链表中当前节点的键。 */
         K key;
-        /** Stores the value of the key-value pair of this node in the list. */
+        /** 存储链表中当前节点的值。 */
         V val;
-        /** Stores the next Entry in the linked list. */
+        /** 存储链表中的下一个Entry。 */
         Entry next;
-        
+
     }
 
-    /** An iterator that iterates over the keys of the dictionary. */
+    /** 迭代器遍历字典的键。 */
     private class ULLMapIter implements Iterator<K> {
 
         /**
-         * Create a new ULLMapIter by setting cur to the first node in the
-         * linked list that stores the key-value pairs.
+         * 创建一个新的ULLMapIter，将cur设置为存储键值对的链表的第一个节点。
          */
         ULLMapIter() {
             cur = list;
@@ -131,7 +128,7 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
         public boolean hasNext() {
             return cur != null;
         }
-       
+
         @Override
         public K next() {
             K ret = cur.key;
@@ -139,10 +136,9 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
             return ret;
         }
 
-
-        /** Stores the current key-value pair. */
+        /** 存储当前键值对。 */
         private Entry cur;
-    
+
     }
 
     @Override
@@ -161,4 +157,5 @@ public class ULLMap<K, V>  implements Map61B<K, V> {
     }
 
 }
+
 
