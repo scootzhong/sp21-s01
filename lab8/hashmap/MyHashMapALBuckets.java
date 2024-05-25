@@ -16,19 +16,19 @@ public class MyHashMapALBuckets<K, V> extends MyHashMap<K, V> {
         super();
     }
 
+
     /**
      * 构造函数，创建初始大小为initialSize的背景区和默认负载因子
-     *
      * @param initialSize 背景区的初始大小
      */
     public MyHashMapALBuckets(int initialSize) {
         super(initialSize);
     }
 
+
     /**
      * 构造函数，创建初始大小为initialSize的背景区。
      * 负载因子（# items / # buckets）应始终小于等于loadFactor
-     *
      * @param initialSize 背景区的初始大小
      * @param maxLoad 最大负载因子
      */

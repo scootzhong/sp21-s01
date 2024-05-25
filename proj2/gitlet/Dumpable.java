@@ -2,10 +2,10 @@ package gitlet;
 
 import java.io.Serializable;
 
-/** An interface describing dumpable objects.
- *  @author P. N. Hilfinger
+/** 一个描述可转储对象的接口。
+ * 作者：P. N. Hilfinger
  */
 interface Dumpable extends Serializable {
-    /** Print useful information about this object on System.out. */
+    /** 在System.out上打印有关此对象的有用信息。 */
     void dump();
 }
